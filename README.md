@@ -36,6 +36,20 @@ cd bitcoin-price-api
 sudo python setup.py install
 ```
 
+## Installing Coinmarketcap api Module
+
+```
+sudo pip install coinmarketcap
+```
+
+## Or if that doesn't work then
+
+```
+git clone https://github.com/mrsmn/coinmarketcap-api
+cd coinmarketcap-api
+sudo python setup.py install
+```
+
 ### Setting up one of the twitter modules
 
 ```
