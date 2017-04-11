@@ -263,9 +263,21 @@ s = coinmarketcap.ticker('bitcoin')
 
 s = json.loads(s)
 
-CoinCap = ("Total Supply: " + s[0]['total_supply'])
+total_supply = s[0]['total_supply']
 
+#8 chars to left of decimal point
+#? chars to the right of decimal point
+
+total_supply_str = str(total_supply)
+total_left = total_supply_str[:8]
+total_right = total_supply_str[9:] #as we dont care for the decimal point
+adj_total_supply  = total_left + total_right
+while len(adj_total_supply) < 16 :
+		adj_total_supply = adj_total_supply + "0"
+
+CoinCap = "Total Supply: " + btcformat(adj_total_supply)
 
 ## Output
 s = twitter.update_status(status=txt1 + '\n' + CoinCap)
-print (s)
+
+print s

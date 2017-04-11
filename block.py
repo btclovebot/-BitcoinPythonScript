@@ -1,50 +1,49 @@
 #!/usr/bin/env python
-
 ## Import the modules required
 import bitcoin
 import bitcoin.rpc
 from twython import Twython
-
+import os
+from exchanges.coindesk import CoinDesk
+import math
 ## Create a proxy object and connect to the bitcoin.rpc
 myproxy = bitcoin.rpc.Proxy()
-
 ## Get the latest CBlock data from bitcoin rpc proxy
 block_info = myproxy.getblock(myproxy.getblockhash(myproxy.getblockcount()))
 
 #Setting these as variables will make them easier for future edits
 app_key =  ''
 app_secret = ''
-oauth_token =''
+oauth_token = ''
 oauth_token_secret = ''
 
+## Get the value
+the_price = CoinDesk().get_current_price(currency='GBP')
+the_price = round(the_price, 2)
 #Prepare your twitter, you will need it for everything
 twitter = Twython(app_key, app_secret, oauth_token, oauth_token_secret)
 #The above should just be a single line, without the break
 
-p2 = "TXVol: "
+txt1 = "#bitcoin CBlock Object Info: Height "
+txt2 = " Hash: "
+txt3 = " TXVol: "
+txt4 = " GBP:"
+tx_count = len(block_info.vtx)
+block_hash = bitcoin.core.b2lx(block_info.GetHash());
+block_number = myproxy.getblockcount()
 
-p3 = len(block_info.vtx)
+if tx_count == 1 :
+    twit = txt1 + str(block_number) + txt2 + str(block_hash) + txt3 + str(tx_count) + txt4 + str(the_price) + " #emptyblock"
 
-U = p2 + str(p3)
+else :
+    twit = txt1 + str(block_number) + txt2 + str(block_hash) + txt3 + str(tx_count) + txt4 + str(the_price)
 
-string = bitcoin.core.b2lx(block_info.GetHash());
+tweet = twitter.update_status(status=twit)
+print tweet
 
-b1 = "Block Hash: "
-
-O = b1 + str(string)
-
-#lp = bitcoin.core.b2lx(block_info.GetHash())
-
-#O = b1 + str(lp)
-
-a = "CBlock Object Info: Height "
-
-w = myproxy.getblockcount()
-
-P = a + str(w)
-
-
-s = twitter.update_status(status='New Block: ' + P + "\n" + O + "\n" + U)
-print (s)
-
-
+#/home/pi/Music/first1.py is AN EXAMPLE path location of the file to run it
+os.system('python /home/pi/Music/firstcode.py')
+os.system('python /home/pi/Music/newq.py')
+os.system('python /home/pi/donation1.py')
+os.system('python /home/pi/Music/newscript.py')
+os.system('python /home/pi/Music/NewUpdate.py')
