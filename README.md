@@ -64,20 +64,8 @@ cd tweepy
 sudo python setup.py install
 ```
 
-## You have to also execute the .py file like you would with a bash script
-
-### sudo chmod +x ./block1.py ./first1.py
-
-### Before running block1.py you will need to go into block1.py, and change the following code
-
-```
-os.system('python /home/pi/Music/first1.py')
-```
-
-### /home/pi/Music/first1.py is an example path, you will need to put in YOUR path location for first1.py
-
 ## command to put in bitcoin.conf
-### blocknotify='location of block1.py' %s
+### blocknotify='location of BitcoinRatBot.py' %s
 
 ## Created By Steve Douglas
 <https://twitter.com/_myveryown>
